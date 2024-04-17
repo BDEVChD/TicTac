@@ -4,6 +4,7 @@ from django.dispatch import receiver  # Add this import statement
 
 
 class GameState(models.Model):
+    team_name = models.CharField(max_length=50, default='frogs')
     game_id = models.CharField(max_length=50)
     secret = models.CharField(max_length=100)
     game_started = models.DateTimeField(auto_now_add=True)
@@ -14,12 +15,11 @@ class WinOutcome(models.Model):
     win_combination = models.TextField()  # JSON list of winning pieces
 
 
-
 class OpponentMoves(models.Model):
     game_state = models.ForeignKey(GameState, on_delete=models.CASCADE, related_name='opponent_moves')
     moves_list = models.TextField()
 
-@receiver(post_save, sender=GameState)
+
 def create_win_outcome(sender, instance, created, **kwargs):
     if created:
         default_moves = [
