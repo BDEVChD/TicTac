@@ -44,7 +44,7 @@ class GameState(models.Model):
                 print(payload)
 
                 response = requests.post(url, data=payload)
-            
+            #test 
             # win_outcome = WinOutcome.objects.get(pk=1)
             # print(len(json.loads(win_outcome.win_combination))) 
             # random_number = random.randint(0, len(game_state.get_pieces_available()))
